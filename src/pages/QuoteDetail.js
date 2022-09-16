@@ -1,8 +1,8 @@
-import {useParams,Route}  from 'react-router-dom';
+import {useParams,Route,Link}  from 'react-router-dom';
 import Comments from '../components/comments/Comments';
 import HighlightedQuote from '../components/quotes/HighlightedQuote'
 import NoQuotesFound from '../components/quotes/NoQuotesFound';
-
+import {Fragment} from 'react';
 
 
 const DUMMY_QUOTES = [
@@ -22,12 +22,17 @@ const QuoteDetails = () => {
 
 
   return (
-    <div>
-     <HighlightedQuote text={quote.text} author={quote.author} />
+    <Fragment>
+      <HighlightedQuote text={quote.text} author={quote.author} />
+     <Route path={`/quotes/${params.quoteId}`} exact>
+       <div className="centered">
+        <Link className='btn--flat'  to={`/quotes/${params.quoteId}/comments`}>Load Comments</Link>
+      </div>
+       </Route>
       <Route path={`/quotes/${params.quoteId}/comments`}>
         <Comments />
       </Route>
-    </div>
+    </Fragment>
   );
 };
 
