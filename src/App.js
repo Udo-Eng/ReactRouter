@@ -1,14 +1,28 @@
-import {Route,Switch} from 'react-router-dom';
+import {Route,Switch,Redirect} from 'react-router-dom';
+import AddQuote from './pages/AddQuote'
+import QuoteDetail from "./pages/QuoteDetail";
+import AllQuotes from './pages/AllQuotes';
+import Layout from './components/layout/Layout';
+
 
 function App() {
   return (
-    <div>
+    <Layout>
       <Switch>
-        <Route path="/quotes"></Route>
-        <Route path="/quotes/:quoteId"></Route>
-        <Route path="/quotes/add"></Route>
+        <Route path="/" exact>
+          <Redirect to="/quotes" />
+        </Route>
+        <Route path="/quotes" exact>
+          <AllQuotes />
+        </Route>
+        <Route path="/quotes/:quoteId">
+          <QuoteDetail />
+        </Route>
+        <Route path="/quote/add">
+          <AddQuote />
+        </Route>
       </Switch>
-    </div>
+    </Layout>
   );
 }
 
